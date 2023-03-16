@@ -28,6 +28,8 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ItemPane extends HBox {
     private App application;
@@ -57,6 +59,7 @@ public class ItemPane extends HBox {
     private ButtonType delete;  //Dialoge box
     private HBox menu, label, filters, cardsr1, cardsr2;
     private VBox filter1, filter2, filter3, show;
+    private Path path;
 
     /**
      * Constructor of the object
@@ -250,7 +253,7 @@ public class ItemPane extends HBox {
         fav = new MenuItem("Favorites");
         favorites.getItems().add(fav);
 
-        ///seventh menu -> All outfits
+        //seventh menu -> All outfits
         outfits = new Menu("Outfits");
         allOutfits = new MenuItem("Outfits"); // create menuitems
         outfits.getItems().add(allOutfits);// add menu items to menu
@@ -272,7 +275,8 @@ public class ItemPane extends HBox {
         profile.setOnMouseClicked(this::profileEvent);
 
         //logo image
-        logo = new ImageView("images/Logo.png");
+        path = Paths.get("images", "Logo.png");
+        logo = new ImageView(path.toString());
 
         //filters
         //first filter -> occasions
@@ -1588,13 +1592,14 @@ public class ItemPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        path = Paths.get("src","main","resources","json","app.json");
+        String pathStr = path.toString();
 
         //write into the file
         FileWriter fw = null;
         String stringToWrite = jsonString;
         try {
-            fw = new FileWriter(path);
+            fw = new FileWriter(pathStr);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1624,7 +1629,8 @@ public class ItemPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            path = Paths.get("src","main","resources","json","app.json");
+            BufferedReader reader = new BufferedReader(new FileReader(path.toString()));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

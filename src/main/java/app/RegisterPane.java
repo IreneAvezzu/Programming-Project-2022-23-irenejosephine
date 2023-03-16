@@ -24,6 +24,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * This class generates a register scene where the user can create a new account (unless its username already exist)
@@ -38,6 +40,7 @@ public class RegisterPane extends GridPane{
     private ImageView img;
     private String set_username, set_password, set_email, set_phone;
     private App application;
+    private Path path;
 
     /**
      * Constructor of the object
@@ -49,7 +52,8 @@ public class RegisterPane extends GridPane{
         title= new Label("Register");
         font = new Font("Times New Roman",24);
         font2 = Font.font("Times New Roman", FontWeight.BOLD, 40);
-        img = new ImageView("images/Profile.png");
+        path = Paths.get("images","Profile.png");
+        img = new ImageView(path.toString());
         username = new Label("Username: *");
         inputusername = new TextField();
         password = new Label("Password: *");
@@ -311,13 +315,14 @@ public class RegisterPane extends GridPane{
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        path = Paths.get("src","main","resources","json","app.json");
+        String pathStr = path.toString();
 
         //write into the file
         FileWriter fw = null;
         String stringToWrite = jsonString;
         try {
-            fw = new FileWriter(path);
+            fw = new FileWriter(pathStr);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -347,7 +352,8 @@ public class RegisterPane extends GridPane{
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            path = Paths.get("src","main","resources","json","app.json");
+            BufferedReader reader = new BufferedReader(new FileReader(path.toString()));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

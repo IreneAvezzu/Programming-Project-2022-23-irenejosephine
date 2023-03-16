@@ -1,8 +1,11 @@
 package app;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * This class represent a app.Wardrobe object that contains some personal data of the user
@@ -16,6 +19,7 @@ public class Wardrobe <T extends Item>{
     private ArrayList <Outfit> outfits = new ArrayList<>();
     private String username, password, email, phone, description = "Click Edit to modify your Bio", picture;
     private int itemId, outfitId;
+    private Path path;
 
 
     /**
@@ -31,7 +35,8 @@ public class Wardrobe <T extends Item>{
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.picture = "images/profile.png";
+        path = Paths.get("images", "profile.png");
+        this.picture = path.toString();
         itemId =0;
     }
 

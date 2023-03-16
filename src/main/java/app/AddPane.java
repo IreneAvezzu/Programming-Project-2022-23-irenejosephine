@@ -7,14 +7,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 //import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-//import java.io.*;
 
 /**
  * This class creates a scene where the user can add an item to its wardrobe by creating it from scratch or by
@@ -30,6 +32,7 @@ public class AddPane extends HBox {
     private ImageView logo;
     private VBox outfitVB, itemVB, show;
     private HBox head, row1;
+    private Path path;
 
     /**
      * Constructor of the object
@@ -44,7 +47,8 @@ public class AddPane extends HBox {
         font = new Font("Times New Roman",24);
         title.setFont(font);
 
-        logo = new ImageView("images/Logo.png");
+        path = Paths.get("images", "Logo.png");
+        logo = new ImageView(path.toString());
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);
 

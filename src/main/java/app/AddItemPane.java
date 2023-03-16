@@ -95,7 +95,7 @@ public class AddItemPane extends HBox {
         doneFromFile = new Button("Done");
         doneFromFile.setStyle("-fx-background-color: orange");
         filePath = new Label("Insert name of JSON file:");
-        chooseFilePath = new TextField();//?
+        chooseFilePath = new TextField();
 
         addColorCategory();
         addSeasonCategory();
