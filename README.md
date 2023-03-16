@@ -106,29 +106,16 @@ graph TD;
 
 We used many libraries to develop our application:
 
+  For I/O:
+  - java.io.*
+  - java.util.Scanner
+  - com.google.gson.Gson
 
-We used GSON to develop serialization and deserialization of objects and JavaFX to develop the GUI.
+  For the GUI:
+  - javafx.*
 
-- java.io.* to read and write .txt file
-- javax.swing.* for GUI
-- java.awt.* for GUI
-- java.util.* for creating arrays and input from console
-- java.io.IOException for catching exceptions
-
-- frontend
-  - import java.awt.geom.Rectangle2D;
-  - import java.awt.image.BufferedImage;
-  - import java.util.concurrent.TimeUnit;
-  - import javax.imageio.ImageIO;
-  - import java.io.IOException;
-  - import java.awt.\_;
-  - import javax.swing.\_;
-  - import java.io.InputStream;
-
-- txt database for users
-  - import java.io.File;
-  - import java.util.ArrayList;
-  - import java.util.Scanner;
+  For creating arrays and input:
+  - java.util.ArrayList
 
 
 ### 4.3. Programming Techniques

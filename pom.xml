@@ -31,15 +31,6 @@
   </properties>
 
   <dependencies>
-    <!-- CAN BE DELETED
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    -->
-
     <dependency>
       <groupId>org.diirt.javafx</groupId>
       <artifactId>javafx-all</artifactId>
@@ -64,26 +55,16 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.7.1</version> <!--   RELEASE / LATEST sono superate-->
+      <version>5.7.1</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.7.1</version> <!--   RELEASE / LATEST sono superate-->
+      <version>5.7.1</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- TO DO NEED TO FIGURE OUT A WAY TO MAKE IT WORK
-       Run Test from CLI -->
-    <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-console-standalone 
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-console-standalone</artifactId>
-      <version>1.8.1</version>
-      <scope>test</scope>
-    </dependency>-->
 
     <!--  Apache Maven Surefire Plugin  -->
     <dependency>
@@ -172,7 +153,7 @@
   </dependencies>
 
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
@@ -193,10 +174,6 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
-        <!--<plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>-->
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
@@ -215,7 +192,6 @@
           <version>3.0.0</version>
         </plugin>
 
-        <!--NUOVI-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
@@ -228,7 +204,7 @@
             <archive>
                 <manifest>
                     <mainClass>
-                      app.Start <!--changed-->
+                      app.Start
                     </mainClass>
                 </manifest>
             </archive>
@@ -249,7 +225,7 @@
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <mainClass>
-                    app.Start <!--changed-->
+                    app.Start
                   </mainClass>
                 </transformer>
               </transformers>
@@ -258,31 +234,6 @@
         </executions>
       </plugin>
 
-      <!-- TO DO NEED TO FIGURE OUT A WAY TO MAKE IT WORK
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <mainClass>
-          app.App2 <!- TO DO: app.Start->
-        </mainClass>
-        <executions>
-          <execution>
-            <goals>
-            <goal>exec</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <executable>maven</executable>
-          <!-  optional  
-          <environmentVariables>
-          <LANG>en_US</LANG>
-          </environmentVariables>->
-        </configuration>
-      </plugin>
-    -->
-
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -290,11 +241,10 @@
         <executions>
           <execution>
             <!-- Default configuration for running -->
-            <!-- Usage: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
               <mainClass>
-                app.Start <!--changed-->
+                app.Start
               </mainClass>
             </configuration>
           </execution>
