@@ -83,7 +83,7 @@ public class App {
     /**
      * Return the index of object of users with value username
      * @param username -> element searched
-     * @return the inxed of object of users with value username
+     * @return the index of object of users with value username
      */
     public int getUserIndex (String username) {
     	return users.indexOf(username);

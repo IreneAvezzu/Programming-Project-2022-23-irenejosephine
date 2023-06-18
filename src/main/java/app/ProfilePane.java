@@ -183,7 +183,6 @@ public class ProfilePane extends HBox {
      * @param event
      */
     public void editAccountEvent (ActionEvent event){
-        inputUsername.setEditable(true);
         inputPassword.setEditable(true);
         inputEmail.setEditable(true);
         inputPhone.setEditable(true);
@@ -220,7 +219,6 @@ public class ProfilePane extends HBox {
      * @param event
      */
     public void doneEvent (ActionEvent event){
-        set_username=inputUsername.getText();
         set_password=inputPassword.getText();
         set_email=inputEmail.getText();
         set_phone=inputPhone.getText();
@@ -228,8 +226,8 @@ public class ProfilePane extends HBox {
         set_photo = inputPath.getText();
 
         String alertText = "";
-        if(!isUserValid(set_username) || !isPswValid(set_password)){
-            alertText+="\nPlease insert a username (max. 10 character min. 5 character)\nand a password (max. 10 charactermin. 5 character containing minimum 1 letter 1 digit 1 special character (\"@\"\"#\"\"%\"\"$\"\"!\"\"?\"))";
+        if(!isPswValid(set_password)){
+            alertText+="\nPlease insert a password (max. 10 and min. 5 character containing minimum 1 letter 1 digit 1 special character (\"@\"\"#\"\"%\"\"$\"\"!\"\"?\"))";
         }
         if (!isEmailValid(set_email)){
             alertText+=("\nE-mail is not valid");
@@ -241,8 +239,7 @@ public class ProfilePane extends HBox {
             alertText+=("\nThe picture path is not valid");
         }
 
-        if (isUserValid(set_username) && isPswValid(set_password) && isEmailValid(set_email)&& isPhoneValid(set_phone) && isPictureValid(set_photo)){
-            getApplication().getWardrobe(getIndex()).setUsername(set_username);
+        if (isPswValid(set_password) && isEmailValid(set_email)&& isPhoneValid(set_phone) && isPictureValid(set_photo)){
             getApplication().getWardrobe(getIndex()).setPassword(set_password);
             getApplication().getWardrobe(getIndex()).setEmail(set_email);
             getApplication().getWardrobe(getIndex()).setPhone(set_phone);
@@ -251,8 +248,6 @@ public class ProfilePane extends HBox {
                 getApplication().getWardrobe(getIndex()).setPicture(set_photo);
             }
 
-            updateApp();
-
             Stage stage = (Stage) done.getScene().getWindow();
             stage.close();
             Stage stage2 = new Stage();
@@ -260,6 +255,8 @@ public class ProfilePane extends HBox {
             stage2.setTitle("Profile");
             stage2.setScene(scene);
             stage2.show();
+
+            //updateApp();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -268,47 +265,8 @@ public class ProfilePane extends HBox {
             alert.setContentText(alertText);
             alert.showAndWait();
         }
+    }
 
-    }
-    /**
-     * This method is a isEmailValid() support method and counts the occurrences of a character inside a String.
-     * In this case it is used to count the occurrence of the character @
-     * @author Josephine Sacchetto
-     * @param str string in which to search for the character
-     * @param ch character to look for
-     * @return true if the character occurs only once, otherwise false
-     */
-    private static boolean countOccurrences(String str, char ch) {
-        int counter = 0;
-        for (int i = 0; i < str.length(); i++)
-        {
-            if (str.charAt(i) == ch) {
-                counter++;
-            }
-        }
-        if(counter!=1) {
-            return false;
-        }else
-            return true;
-    }
-    /**
-     * This method is used to check whether the user entered is valid.
-     * The user must contain minimum 5 maximum 10 characters
-     * @author Josephine Sacchetto
-     * @param user entered user to be validated
-     * @return true if the user is valid, false if the user is empty or does not correspond to the requirements
-     */
-    public static boolean isUserValid(String user) {
-        if (user.isEmpty()){
-            return false;
-        }
-        else if (user.length()<=10 && user.length()>=5){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
     /**
      * This method is used to check whether the password entered is valid.
      * The password must contain at least:
@@ -334,15 +292,9 @@ public class ProfilePane extends HBox {
     }
     /**
      * This method is used to check whether the email entered is valid.
-     * The email must contain at least:
-     * one "@", one ore more "."
-     * must not contain:
-     * "@." or ".@"
-     * can not start with:
-     * "." or "@"
-     * can not end with:
-     * "." or "@"
-     * @author Josephine Sacchetto
+     * The email must respect the model:
+     * text (letters, digits, ., _, -) @ text (letters, digits, ., _, -) . text (letters)
+     * @author Irene Avezzù
      * @param email entered email to be validated
      * @return true if the email is valid or empty, false if the email does not correspond to the requirements
      */
@@ -350,17 +302,20 @@ public class ProfilePane extends HBox {
         if (email.isEmpty()){
             return true;
         }
-        else if(countOccurrences(email,'@')&& email.contains("@")&&email.contains(".")&& (!email.contains("@.")) && (!email.contains(".@")) && (!email.startsWith("@")) && (!email.startsWith(".")) && (!email.endsWith("@"))  &&(!email.endsWith("."))){
-            return true;
-        }
-        else{
-            return false;
+        else {
+            String emailRegex = "^[a-zA-Z0-9_.-]+" + //string begins with a string that contains one or more upper/lower cases, digits and symbols as _, - and .
+                    "@" + //there must be the @ symbol
+                    "[a-zA-Z0-9_.-]+" + // after the @ there is another string similar to before
+                    "[.]" + //there must be a .
+                    "[a-zA-Z]+$"; //the string ends with a domain made of letters
+            return email.matches(emailRegex);
         }
     }
     /**
      * This method is used to check whether the phone number entered is valid.
-     * the phone number must contain 10 numbers
-     * @author Josephine Sacchetto
+     * The email must respect the model:
+     * optional prefix ('+' + 1 to 3 digits) area code (1 to 3 digits) number (4 or more digits)
+     * @author Irene Avezzù
      * @param phone entered phone number to be validated
      * @return true if the phone number is valid or empty, false if the phone number does not correspond to the requirements
      */
@@ -368,11 +323,14 @@ public class ProfilePane extends HBox {
         if (phone.isEmpty()){
             return true;
         }
-        else if (phone.length()==10 && NumberUtils.isNumber(phone)){  //isNumber() The NumberUtils class method accepts the input string as a parameter and checks whether it is a number
-            return true;
-        }
-        else{
-            return false;
+        else {
+            String phoneRegex = "^(\\+[0-9]{1,3})?" + // number may begin with a prefix of 1 to 3 digits
+                    "-?" + //optional separator
+                    "[0-9]{1,3}" + //one to three digits, representing the area code
+                    "-?" + //optional separator
+                    "[0-9]{4,}$"; //four or more digits, representing the main part of the phone number
+
+            return phone.matches(phoneRegex);
         }
     }
     /**
