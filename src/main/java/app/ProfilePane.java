@@ -55,7 +55,7 @@ public class ProfilePane extends HBox {
         this.index = index;
 
         //logo image and event handler
-        logo = new ImageView("images/Logo.png");
+        logo = new ImageView("images" + File.separator + "Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);//MouseEvent e)
 
@@ -329,15 +329,9 @@ public class ProfilePane extends HBox {
     }
     /**
      * This method is used to check whether the email entered is valid.
-     * The email must contain at least:
-     * one "@", one ore more "."
-     * must not contain:
-     * "@." or ".@"
-     * can not start with:
-     * "." or "@"
-     * can not end with:
-     * "." or "@"
-     * @author Josephine Sacchetto
+     * The email must respect the model:
+     * text (letters, digits, ., _, -) @ text (letters, digits, ., _, -) . text (letters)
+     * @author Irene Avezzù
      * @param email entered email to be validated
      * @return true if the email is valid or empty, false if the email does not correspond to the requirements
      */
@@ -345,11 +339,13 @@ public class ProfilePane extends HBox {
         if (email.isEmpty()){
             return true;
         }
-        else if(countOccurrences(email,'@')&& email.contains("@")&&email.contains(".")&& (!email.contains("@.")) && (!email.contains(".@")) && (!email.startsWith("@")) && (!email.startsWith(".")) && (!email.endsWith("@"))  &&(!email.endsWith("."))){
-            return true;
-        }
-        else{
-            return false;
+        else {
+            String emailRegex = "^[a-zA-Z0-9_.-]+" + //string begins with a string that contains one or more upper/lower cases, digits and symbols as _, - and .
+                    "@" + //there must be the @ symbol
+                    "[a-zA-Z0-9_.-]+" + // after the @ there is another string similar to before
+                    "[.]" + //there must be a .
+                    "[a-zA-Z]+$"; //the string ends with a domain made of letters
+            return email.matches(emailRegex);
         }
     }
     /**
@@ -385,7 +381,7 @@ public class ProfilePane extends HBox {
             return true;
         }
         else {
-            photo = "src/main/resources/"+photo;
+            photo = "src" + File.separator + "main" + File.separator + "resources" + File.separator + photo;
             File f = new File(photo);
             if (f.exists() && !f.isDirectory()){
                 return true;
@@ -404,7 +400,7 @@ public class ProfilePane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        String path = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator + "app.json";
 
         //write into the file
         FileWriter fw = null;
@@ -440,7 +436,7 @@ public class ProfilePane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator + "app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

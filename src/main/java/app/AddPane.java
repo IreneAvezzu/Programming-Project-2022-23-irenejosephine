@@ -44,7 +44,7 @@ public class AddPane extends HBox {
         font = new Font("Times New Roman",24);
         title.setFont(font);
 
-        logo = new ImageView("images/Logo.png");
+        logo = new ImageView("images" + File.separator + "Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);
 

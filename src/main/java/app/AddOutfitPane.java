@@ -1,5 +1,3 @@
-//getHostServices().showDocument("http://www.yahoo.com");
-
 package app;
 
 import com.google.gson.Gson;
@@ -51,7 +49,7 @@ public class AddOutfitPane extends HBox {
         font = new Font("Times New Roman",24);
         title.setFont(font);
 
-        logo = new ImageView("images/Logo.png");
+        logo = new ImageView("images" + File.separator + "Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);
 
@@ -359,7 +357,7 @@ public class AddOutfitPane extends HBox {
             }
             //if there is no given picture path is set a default picture
             if (inputPath.isEmpty()) {
-                inputPath = "images/outfit.png";
+                inputPath = "images" + File.separator + "outfit.png";
             }
 
             //creates the new outfit and add the items selected
@@ -442,7 +440,7 @@ public class AddOutfitPane extends HBox {
             return true;
         }
         else {
-            path = "src/main/resources/"+path;
+            path = "src" + File.separator + "main" + File.separator + "resources" + File.separator + path;
             File f = new File(path);
             if (f.exists() && !f.isDirectory()){
                 return true;
@@ -461,7 +459,7 @@ public class AddOutfitPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        String path = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator + "app.json";
 
         //write into the file
         FileWriter fw = null;
@@ -497,7 +495,7 @@ public class AddOutfitPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator + "app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

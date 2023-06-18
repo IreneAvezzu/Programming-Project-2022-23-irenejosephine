@@ -13,10 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Optional;
 import javafx.scene.control.Alert;
@@ -797,7 +794,7 @@ public class ItemPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        String path = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator + "app.json";
 
         //write into the file
         FileWriter fw = null;
@@ -833,7 +830,7 @@ public class ItemPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator + "app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

@@ -1,5 +1,6 @@
 package app;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Wardrobe <T extends Item>{
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.picture = "images/profile.png";
+        this.picture = "images"+ File.separator + "profile.png";
         itemId =0;
     }
 

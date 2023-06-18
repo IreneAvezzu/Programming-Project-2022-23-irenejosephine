@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 /**
  * Generates a scene where the main page of the application is displayed.
  * On top there is our logo and a menu bas is present where the user can select the items to display
@@ -78,7 +80,7 @@ public class HomePane extends HBox {
         information.setStyle("-fx-background-color: orange");
 
         //background image
-        backgroud = new Image("images/Wardrobe.jpg");
+        backgroud = new Image("images" + File.separator + "Wardrobe.jpg");
         backgroudView = new ImageView(backgroud);
         backgroudView.setFitHeight(160);
         backgroudView.setFitWidth(160);
@@ -140,7 +142,7 @@ public class HomePane extends HBox {
 
         );
 
-        Image image = new Image("images/aboutUs.png");
+        Image image = new Image("images" + File.separator + "aboutUs.png");
         ImageView view = new ImageView(image);
         view.setFitHeight(250);
         view.setFitWidth(160);
