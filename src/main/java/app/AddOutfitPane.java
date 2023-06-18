@@ -19,10 +19,6 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-
 /**
  * This class creates a scene where the user can add an item to its wardrobe by creating it from scratch or by
  * loading it from a file (json)
@@ -41,7 +37,6 @@ public class AddOutfitPane extends HBox {
     private ImageView logo;
     private VBox imagePathVB, seasonVB, occasionVB, topVB, bottomVB, dressVB, accessorizeVB, descriptionVB, options, showAll, showFromFile, filePathVB;
     private HBox head, row1, row2, row3, row4, row5;
-    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -56,9 +51,7 @@ public class AddOutfitPane extends HBox {
         font = new Font("Times New Roman",24);
         title.setFont(font);
 
-        
-        generalPath = Paths.get("images", "Logo.png");
-        logo = new ImageView(generalPath.toString());
+        logo = new ImageView("images/Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);
 
@@ -366,8 +359,7 @@ public class AddOutfitPane extends HBox {
             }
             //if there is no given picture path is set a default picture
             if (inputPath.isEmpty()) {
-                generalPath = Paths.get("images", "outfit.png");
-                inputPath = generalPath.toString();
+                inputPath = "images/outfit.png";
             }
 
             //creates the new outfit and add the items selected
@@ -462,8 +454,7 @@ public class AddOutfitPane extends HBox {
             return true;
         }
         else {
-            generalPath = Paths.get("src", "main", "resources", path);
-            path = generalPath.toString();
+            path = "src/main/resources/"+path;
             File f = new File(path);
             if (f.exists() && !f.isDirectory()){
                 return true;
@@ -482,8 +473,7 @@ public class AddOutfitPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        generalPath = Paths.get("src", "main", "resources", "json", "app.json");
-        String path = generalPath.toString();
+        String path = "src\\main\\resources\\json\\app.json";
 
         //write into the file
         FileWriter fw = null;
@@ -519,8 +509,7 @@ public class AddOutfitPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            generalPath = Paths.get("src", "main", "resources", "json", "app.json");
-            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

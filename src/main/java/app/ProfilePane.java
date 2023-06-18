@@ -16,9 +16,6 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import java.io.*;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 /**
  * This class generates a scene where the user can access and update its personal data
  * @author Josephine Sacchetto frontend
@@ -37,7 +34,6 @@ public class ProfilePane extends HBox {
     private HBox top;
     private VBox right, left;
     private String set_username, set_password, set_email, set_phone, set_description, set_photo;
-    private Path generalPath;
 
     /**
      * This method is a isEmailValid() support method and counts the occurrences of a character inside a String.
@@ -59,8 +55,7 @@ public class ProfilePane extends HBox {
         this.index = index;
 
         //logo image and event handler
-        generalPath = Paths.get("images", "Logo.png");
-        logo = new ImageView(generalPath.toString());
+        logo = new ImageView("images/Logo.png");
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);//MouseEvent e)
 
@@ -183,6 +178,7 @@ public class ProfilePane extends HBox {
      * @param event
      */
     public void editAccountEvent (ActionEvent event){
+        inputUsername.setEditable(true);
         inputPassword.setEditable(true);
         inputEmail.setEditable(true);
         inputPhone.setEditable(true);
@@ -219,6 +215,7 @@ public class ProfilePane extends HBox {
      * @param event
      */
     public void doneEvent (ActionEvent event){
+        set_username=inputUsername.getText();
         set_password=inputPassword.getText();
         set_email=inputEmail.getText();
         set_phone=inputPhone.getText();
@@ -226,8 +223,8 @@ public class ProfilePane extends HBox {
         set_photo = inputPath.getText();
 
         String alertText = "";
-        if(!isPswValid(set_password)){
-            alertText+="\nPlease insert a password (max. 10 and min. 5 character containing minimum 1 letter 1 digit 1 special character (\"@\"\"#\"\"%\"\"$\"\"!\"\"?\"))";
+        if(!isUserValid(set_username) || !isPswValid(set_password)){
+            alertText+="\nPlease insert a username (max. 10 character min. 5 character)\nand a password (max. 10 charactermin. 5 character containing minimum 1 letter 1 digit 1 special character (\"@\"\"#\"\"%\"\"$\"\"!\"\"?\"))";
         }
         if (!isEmailValid(set_email)){
             alertText+=("\nE-mail is not valid");
@@ -239,7 +236,8 @@ public class ProfilePane extends HBox {
             alertText+=("\nThe picture path is not valid");
         }
 
-        if (isPswValid(set_password) && isEmailValid(set_email)&& isPhoneValid(set_phone) && isPictureValid(set_photo)){
+        if (isUserValid(set_username) && isPswValid(set_password) && isEmailValid(set_email)&& isPhoneValid(set_phone) && isPictureValid(set_photo)){
+            getApplication().getWardrobe(getIndex()).setUsername(set_username);
             getApplication().getWardrobe(getIndex()).setPassword(set_password);
             getApplication().getWardrobe(getIndex()).setEmail(set_email);
             getApplication().getWardrobe(getIndex()).setPhone(set_phone);
@@ -248,6 +246,8 @@ public class ProfilePane extends HBox {
                 getApplication().getWardrobe(getIndex()).setPicture(set_photo);
             }
 
+            updateApp();
+
             Stage stage = (Stage) done.getScene().getWindow();
             stage.close();
             Stage stage2 = new Stage();
@@ -255,8 +255,6 @@ public class ProfilePane extends HBox {
             stage2.setTitle("Profile");
             stage2.setScene(scene);
             stage2.show();
-
-            //updateApp();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -265,8 +263,47 @@ public class ProfilePane extends HBox {
             alert.setContentText(alertText);
             alert.showAndWait();
         }
-    }
 
+    }
+    /**
+     * This method is a isEmailValid() support method and counts the occurrences of a character inside a String.
+     * In this case it is used to count the occurrence of the character @
+     * @author Josephine Sacchetto
+     * @param str string in which to search for the character
+     * @param ch character to look for
+     * @return true if the character occurs only once, otherwise false
+     */
+    private static boolean countOccurrences(String str, char ch) {
+        int counter = 0;
+        for (int i = 0; i < str.length(); i++)
+        {
+            if (str.charAt(i) == ch) {
+                counter++;
+            }
+        }
+        if(counter!=1) {
+            return false;
+        }else
+            return true;
+    }
+    /**
+     * This method is used to check whether the user entered is valid.
+     * The user must contain minimum 5 maximum 10 characters
+     * @author Josephine Sacchetto
+     * @param user entered user to be validated
+     * @return true if the user is valid, false if the user is empty or does not correspond to the requirements
+     */
+    public static boolean isUserValid(String user) {
+        if (user.isEmpty()){
+            return false;
+        }
+        else if (user.length()<=10 && user.length()>=5){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     /**
      * This method is used to check whether the password entered is valid.
      * The password must contain at least:
@@ -292,9 +329,15 @@ public class ProfilePane extends HBox {
     }
     /**
      * This method is used to check whether the email entered is valid.
-     * The email must respect the model:
-     * text (letters, digits, ., _, -) @ text (letters, digits, ., _, -) . text (letters)
-     * @author Irene Avezzù
+     * The email must contain at least:
+     * one "@", one ore more "."
+     * must not contain:
+     * "@." or ".@"
+     * can not start with:
+     * "." or "@"
+     * can not end with:
+     * "." or "@"
+     * @author Josephine Sacchetto
      * @param email entered email to be validated
      * @return true if the email is valid or empty, false if the email does not correspond to the requirements
      */
@@ -302,13 +345,11 @@ public class ProfilePane extends HBox {
         if (email.isEmpty()){
             return true;
         }
-        else {
-            String emailRegex = "^[a-zA-Z0-9_.-]+" + //string begins with a string that contains one or more upper/lower cases, digits and symbols as _, - and .
-                    "@" + //there must be the @ symbol
-                    "[a-zA-Z0-9_.-]+" + // after the @ there is another string similar to before
-                    "[.]" + //there must be a .
-                    "[a-zA-Z]+$"; //the string ends with a domain made of letters
-            return email.matches(emailRegex);
+        else if(countOccurrences(email,'@')&& email.contains("@")&&email.contains(".")&& (!email.contains("@.")) && (!email.contains(".@")) && (!email.startsWith("@")) && (!email.startsWith(".")) && (!email.endsWith("@"))  &&(!email.endsWith("."))){
+            return true;
+        }
+        else{
+            return false;
         }
     }
     /**
@@ -344,8 +385,7 @@ public class ProfilePane extends HBox {
             return true;
         }
         else {
-            generalPath = Paths.get("src", "main", "resources", photo);
-            photo = generalPath.toString();
+            photo = "src/main/resources/"+photo;
             File f = new File(photo);
             if (f.exists() && !f.isDirectory()){
                 return true;
@@ -364,8 +404,7 @@ public class ProfilePane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        generalPath = Paths.get("src", "main", "resources", "json", "app.json");
-        String path = generalPath.toString();
+        String path = "src\\main\\resources\\json\\app.json";
 
         //write into the file
         FileWriter fw = null;
@@ -401,8 +440,7 @@ public class ProfilePane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            generalPath = Paths.get("src", "main", "resources", "json", "app.json");
-            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

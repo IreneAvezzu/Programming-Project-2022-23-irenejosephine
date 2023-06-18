@@ -28,8 +28,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ItemPane extends HBox {
     private App application;
@@ -59,7 +57,6 @@ public class ItemPane extends HBox {
     private ButtonType delete;  //Dialoge box
     private HBox menu, label, filters, cardsr1, cardsr2;
     private VBox filter1, filter2, filter3, show;
-    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -253,7 +250,7 @@ public class ItemPane extends HBox {
         fav = new MenuItem("Favorites");
         favorites.getItems().add(fav);
 
-        //seventh menu -> All outfits
+        ///seventh menu -> All outfits
         outfits = new Menu("Outfits");
         allOutfits = new MenuItem("Outfits"); // create menuitems
         outfits.getItems().add(allOutfits);// add menu items to menu
@@ -275,8 +272,7 @@ public class ItemPane extends HBox {
         profile.setOnMouseClicked(this::profileEvent);
 
         //logo image
-        generalPath = Paths.get("images", "Logo.png");
-        logo = new ImageView(generalPath.toString());
+        logo = new ImageView("images/Logo.png");
 
         //filters
         //first filter -> occasions
@@ -728,16 +724,16 @@ public class ItemPane extends HBox {
                 if (seasonsFilter.getValue()!=null){
                     //All filters are != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) occasionsFilter.getValue(),
-                        (String) colorsFilter.getValue(),
-                        (String) seasonsFilter.getValue()
-                        );
+                            (String) occasionsFilter.getValue(),
+                            (String) colorsFilter.getValue(),
+                            (String) seasonsFilter.getValue()
+                    );
                 }
                 else{
                     //occasion and color filters are != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) occasionsFilter.getValue(),
-                        (String) colorsFilter.getValue()
+                            (String) occasionsFilter.getValue(),
+                            (String) colorsFilter.getValue()
                     );
                 }
             }
@@ -745,14 +741,14 @@ public class ItemPane extends HBox {
                 if ((String) seasonsFilter.getValue()!=null){
                     //occasion and season filters are != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) occasionsFilter.getValue(),
-                        (String) seasonsFilter.getValue()
+                            (String) occasionsFilter.getValue(),
+                            (String) seasonsFilter.getValue()
                     );
                 }
                 else{
                     //occasion filter is != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) occasionsFilter.getValue()
+                            (String) occasionsFilter.getValue()
                     );
                 }
             }
@@ -762,14 +758,14 @@ public class ItemPane extends HBox {
                 if (seasonsFilter.getValue()!=null){
                     //color and season filters are != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) colorsFilter.getValue(),
-                        (String) seasonsFilter.getValue()
+                            (String) colorsFilter.getValue(),
+                            (String) seasonsFilter.getValue()
                     );
                 }
                 else{
                     //color filters is != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) colorsFilter.getValue()
+                            (String) colorsFilter.getValue()
                     );
                 }
             }
@@ -777,7 +773,7 @@ public class ItemPane extends HBox {
                 if (seasonsFilter.getValue()!=null){
                     //season filter is != null
                     filteredItemToDisplay = application.getWardrobe(index).search(itemToDisplay,
-                        (String) seasonsFilter.getValue()
+                            (String) seasonsFilter.getValue()
                     );
                     tf=false;
                 }
@@ -1592,14 +1588,13 @@ public class ItemPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        generalPath = Paths.get("src","main","resources","json","app.json");
-        String pathStr = generalPath.toString();
+        String path = "src\\main\\resources\\json\\app.json";
 
         //write into the file
         FileWriter fw = null;
         String stringToWrite = jsonString;
         try {
-            fw = new FileWriter(pathStr);
+            fw = new FileWriter(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1629,8 +1624,7 @@ public class ItemPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            generalPath = Paths.get("src","main","resources","json","app.json");
-            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
+            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;
