@@ -395,37 +395,25 @@ public class AddOutfitPane extends HBox {
                         }
                     }
                 }
-
-
             }
 
             application.getWardrobe(getIndex()).addOutfit(nO);
 
-            if ( ( getApplication().getWardrobe(getIndex()).getOutfits().indexOf(nO) ) > 0){
-                Alert information = new Alert (AlertType.INFORMATION);
-                information.setHeaderText(null);
-                information.setWidth(400);
-                information.setContentText("New outfit was added");
-                information.showAndWait();
+            updateApp();
 
-                updateApp();
+            Alert information = new Alert (AlertType.INFORMATION);
+            information.setHeaderText(null);
+            information.setWidth(400);
+            information.setContentText("New outfit was added");
+            information.showAndWait();
 
-                Stage stage = (Stage) done.getScene().getWindow();
-                stage.close();
-                Stage stage2 = new Stage();
-                Scene scene = new Scene(new HomePane(getApplication(), getIndex()), 800, 600);
-                stage2.setTitle("Home");
-                stage2.setScene(scene);
-                stage2.show();
-            }
-            else{
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("A problem occurred during the creation of the new outfit");
-                alert.showAndWait();
-                throw new addOutfitException();
-            }
+            Stage stage = (Stage) done.getScene().getWindow();
+            stage.close();
+            Stage stage2 = new Stage();
+            Scene scene = new Scene(new HomePane(getApplication(), getIndex()), 800, 600);
+            stage2.setTitle("Home");
+            stage2.setScene(scene);
+            stage2.show();
         }
     }
 

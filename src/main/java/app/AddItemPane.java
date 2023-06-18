@@ -381,7 +381,7 @@ public class AddItemPane extends HBox {
                         break;
                     }
                 }
-
+                //set default pictures
                 if (inputPath.isEmpty()) {
                     switch (inputCategory) {
                         case "Tops": {
@@ -491,8 +491,7 @@ public class AddItemPane extends HBox {
                     }
                 }
 
-
-                //creates the correct item based on the user's selection and add the to the closet
+                //creates the correct item based on the user's selection and add it into the closet
                 int id = application.getWardrobe(index).getItemId();
                 Item i = new Top (inputSeason, inputOccasion, inputColor, inputType, inputFavorite, inputPath, inputDescription, id);
                 switch (inputCategory) {
@@ -520,35 +519,22 @@ public class AddItemPane extends HBox {
                         i=nA;
                         break;
                     }
-
-
                 }
-                if (getApplication().getWardrobe(getIndex()).getItems().indexOf(i)>0){
-                    Alert information = new Alert (AlertType.INFORMATION);
-                    information.setHeaderText(null);
-                    information.setWidth(400);
-                    information.setContentText("New item was added");
-                    information.showAndWait();
+                updateApp();
 
-                    updateApp();
+                Alert information = new Alert (AlertType.INFORMATION);
+                information.setHeaderText(null);
+                information.setWidth(400);
+                information.setContentText("New item was added");
+                information.showAndWait();
 
-                    Stage stage = (Stage) doneOptions.getScene().getWindow();
-                    stage.close();
-                    Stage stage2 = new Stage();
-                    Scene scene = new Scene(new HomePane(getApplication(), getIndex()), 800, 600);
-                    stage2.setTitle("Home");
-                    stage2.setScene(scene);
-                    stage2.show();
-                }
-                else{
-                    Alert alert = new Alert(AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(null);
-                    alert.setContentText("A problem occurred during the creation of the item");
-                    alert.showAndWait();
-                    throw new addItemException();
-                }
-
+                Stage stage = (Stage) doneOptions.getScene().getWindow();
+                stage.close();
+                Stage stage2 = new Stage();
+                Scene scene = new Scene(new HomePane(getApplication(), getIndex()), 800, 600);
+                stage2.setTitle("Home");
+                stage2.setScene(scene);
+                stage2.show();
             }
         }
     }
