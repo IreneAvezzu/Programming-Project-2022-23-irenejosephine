@@ -2,7 +2,7 @@
 
 ## 1. About
 
-The aim of our project was to develop an app to create a digital version of our closet to have it always with us and to solve the problem that many people face every moring in front of the closet: "I have nothing to wear !". This app helps the user organize all of the pieces of clothing present in his/hers wardrobe.
+The aim of our project was to develop an app to create a digital version of our closet to have it always with us and to solve the problem that many people face every morning in front of the closet: "I have nothing to wear !". This app helps the user organize all of the pieces of clothing present in his/hers wardrobe.
 The menu bar on the top help to navigate the app, in addition, the filters of the research allow the user to find the exact item he/she is looking for.
 
 ### 1.1. Demo
@@ -18,9 +18,7 @@ This project was created by:
 
 ## 3. Usage
 
-Describe how to compile, package, and run your project here.
-
-To run our appliction is required Java 17.
+To run our application is required Java 17, since it's a maven project there is no need to have JavaFX installed as long as the project is run with the following commands.
 
 To build the project, run:
 
@@ -36,11 +34,10 @@ mvn clean javafx:run
 
 Another option to run the project is to open it with IntelliJ IDEA and directly run the Start class. If the error "JavaFX runtime components are missing, and are required to run this application" is generated a new VM Option must be set as shown in this video (https://www.youtube.com/watch?v=hS_6ek9rTco).
 
-Once the application is running the user can either create a new account or use one of the existing one:
+Once the application is running the user can either create a new account or use one of the existing ones:
 - User1: username: username1 - psw: password1!
 - User2: username: josephine - psw: jose1!
 - User3: username: irene - psw: irene3!
-
 
 ## 4. Implementation
 
@@ -49,7 +46,7 @@ Once the application is running the user can either create a new account or use 
 We divided our idea into blocks structuring our application in classes.
 
 FRONT-END:
-The Start class represents the starting point for our application, it creates an item of LoginPane which, based on the user actions, can lead to a RegisterPane (where the user can create a new account and then be redirected to the LoginPane) or the HomePane. The HomePane allows the user to filter the items (ItemPane), add new items/outfits (AddPane, AddOutfitPane, AddItemPane) or go to its Profile (ProfilePane).
+The Start class represents the starting point for our application, it creates an item of LoginPane which, based on the user actions, can lead to a RegisterPane (where the user can create a new account and then be redirected to the LoginPane) or the HomePane. The HomePane allows the user to filter the items (ItemPane), add new items/outfits (AddPane, AddOutfitPane, AddItemPane), or go to its Profile (ProfilePane).
 
 ```mermaid
 graph TD;
@@ -73,7 +70,7 @@ graph TD;
 ```
 
 BACK-END:
-The Item class represent the base element for the wardrobe. Top, Bottom, Dress and Accessorize classes extend it.
+The Item class represents the base element for the wardrobe. Top, Bottom, Dress, and Accessorize classes extend it.
 ```mermaid
 graph TD;
   Item-->Top;
@@ -121,16 +118,17 @@ We used many libraries to develop our application:
 ### 4.3. Programming Techniques
 
 List and explain how you used the 10 programming techniques required for this project.
-1.   **GUI:** We used JavaFX to realize the GUI
-2.   **Logging:** each user has its own wardrobe so creating an account was a necessity and to allow more users on the same devices logging become fundamental
-3.   **I/O file:** we used a file to obviate the absence of a database, we used external text files to "remember" the past uses of the application. Files are also used to import items in a faster way compared to the manual option. In addition, input files are used to assign to each item and outfit a picture
-4.   **Try/catch:** try and catch were necessary when working with I/O file  
-5.   **Overriding:** the toString of the class Item and Outfit has been overridden
-6.   **Overloading:** we used multiple constructors for the Item obj based on which parameters were passed
-7.   **Serialization:** we used serialization to simulate a database, the application is saved in a JSON file and reloaded every time the app is open
-8.   **Deserialization:** we used deserialization to allow our application to create items objects from a JSON file and to load the application from its JSON file used to simulate a database
-9.   **Varargs:** we used Varargs in the Wardrobe class in its search method because in some cases we pass only one parameter to filter but in other cases, we pass multiples string 
-10.  **Custom exceptions:** we used custom exceptions to handle problems in the loginPane, registerPane, addItemPane and addOutifitPane
+1.   **GUI:** We used JavaFX to realize the GUI;
+2.   **Logging:** each user has its own wardrobe so creating an account was a necessity and to allow more users on the same devices logging become fundamental;
+3.   **I/O file:** we used a file to obviate the absence of a database, we used external text files to "remember" the past uses of the application. Files are also used to import items in a faster way compared to the manual option. In addition, input files are used to assign to each item and outfit a picture;
+4.   **Try/catch:** try and catch were necessary when working with I/O file;
+5.   **Overriding:** the toString of the class Item and Outfit has been overridden;
+6.   **Overloading:** we used multiple constructors for the Item obj based on which parameters were passed;
+7.   **Serialization:** we used serialization to simulate a database, the application is saved in a JSON file and reloaded every time the app is open;
+8.   **Deserialization:** we used deserialization to allow our application to create items objects from a JSON file and to load the application from its JSON file used to simulate a database;
+9.   **Varargs:** we used Varargs in the Wardrobe class in its search method because in some cases we pass only one parameter to filter but in other cases, we pass multiples string;
+10.  **Custom exceptions:** we used custom exceptions to handle problems in the loginPane, registerPane, addItemPane and addOutifitPane;
+11.  **Regular expression:** we used regular expressions to recognize if the email and phone number were of the correct format.
 
 ### 4.4. Tests
 
@@ -149,13 +147,13 @@ Description of the roles and responsibilities that each member had in this proje
 
 - **Irene Avezzù:** I was mainly responsible for the implementation of the backend of the app
 - **Josephine Sacchetto:** I was mainly responsible for the implementation of the front end of the app
-- We worked separately on the actual realisation of the code but the idea for both the structure of the backend and the illustrations of the front end were discussed and outlined together. We developed together the connection between the front and backend. We also worked together when extra materials were needed, such as images or research on structure (e.g. object of JavaFx). We collaborated on the realization of the test suits.
+- We worked separately on the actual realization of the code but the idea for both the structure of the backend and the illustrations of the front end were discussed and outlined together. We developed together the connection between the front and backend. We also worked together when extra materials were needed, such as images or research on structure (e.g. object of JavaFx). We collaborated on the realization of the test suits.
 
 ### 5.3. Main Challenges
 
 Elaborate on the main challenges each group member faced throughout the project and how they were surpassed.
 
-- **Irene Avezzù:** The most difficult aspect of this project for me was to implement the test suits because I still struggle in the creation of a complete suit for testing. In addition, working with Maven was difficult, especially in the realisation of the POM file.
+- **Irene Avezzù:** The most difficult aspect of this project for me was to implement the test suits because I still struggle in the creation of a complete suit for testing. In addition, working with Maven was difficult, especially in the realization of the POM file.
 - **Josephine Sacchetto:** The most difficult thing for me was the organization of time. The reason was that I had no clear plan to follow so I had to stop and create a detailed plan with day/week/month goals to work toward. By doing this I was able to work better.
 
 ### 5.4. Learning Outcomes
