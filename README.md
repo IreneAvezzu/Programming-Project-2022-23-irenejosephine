@@ -2,8 +2,9 @@
 
 ## 1. About
 
-The aim of our project was to develop an app to create a digital version of our closet to have it always with us and to solve the problem that many people face every morning in front of the closet: "I have nothing to wear !". This app helps the user organize all of the pieces of clothing present in his/hers wardrobe.
-The menu bar on the top help to navigate the app, in addition, the filters of the research allow the user to find the exact item he/she is looking for.
+Our project aimed to develop a mobile application that creates a digital version of users' closets, providing them with a convenient way to access their wardrobe anytime, anywhere. The primary goal was to address the common problem many people face every morning, standing in front of their closet, when they exclaim, "I have nothing to wear!" The app assists users in organizing their clothing items effectively.
+
+The top menu bar facilitates easy navigation throughout the app, while the search filters enable users to quickly locate specific clothing items they are looking for.
 
 ### 1.1. Demo
 
@@ -119,7 +120,7 @@ We used many libraries to develop our application:
 
 List and explain how you used the 10 programming techniques required for this project.
 1.   **GUI:** We used JavaFX to realize the GUI;
-2.   **Logging:** each user has its own wardrobe so creating an account was a necessity and to allow more users on the same devices logging become fundamental;
+2.   **Logging:** each user has its wardrobe so creating an account was a necessity and to allow more users on the same devices logging become fundamental;
 3.   **I/O file:** we used a file to obviate the absence of a database, we used external text files to "remember" the past uses of the application. Files are also used to import items in a faster way compared to the manual option. In addition, input files are used to assign to each item and outfit a picture;
 4.   **Try/catch:** try and catch were necessary when working with I/O file;
 5.   **Overriding:** the toString of the class Item and Outfit has been overridden;
@@ -127,8 +128,8 @@ List and explain how you used the 10 programming techniques required for this pr
 7.   **Serialization:** we used serialization to simulate a database, the application is saved in a JSON file and reloaded every time the app is open;
 8.   **Deserialization:** we used deserialization to allow our application to create items objects from a JSON file and to load the application from its JSON file used to simulate a database;
 9.   **Varargs:** we used Varargs in the Wardrobe class in its search method because in some cases we pass only one parameter to filter but in other cases, we pass multiples string;
-10.  **Custom exceptions:** we used custom exceptions to handle problems in the loginPane, registerPane, addItemPane and addOutifitPane;
-11.  **Regular expression:** we used regular expressions to recognize if the email and phone number were of the correct format.
+10.  **Custom exceptions:** we used custom exceptions to handle problems in the loginPane, registerPane, addItemPane, and addOutifitPane;
+11.  **Regular expression:** we used regular expressions to recognize if the email and phone numbers were in the correct format.
 
 ### 4.4. Tests
 
@@ -138,8 +139,9 @@ To assert all actions of our application work in the correct way we worked on bo
 
 ### 5.1. Overall Experience
 
-The idea for this project came to us pretty easily but the realization did not come as easy. We wanted to create something that could be actually useful. We initially struggled with the impossibility of using a database. The choice between a web app and a desktop took us some time but in the end, we choose a desktop app because it would be easier to upload a picture of items for the users.
-Even if we had never collaborated on a project we divided in an optimal way the implementations needed for the app. On the other hand, we did not manage the time given in the best way but by the end, we were able to complete the assigned task.
+The idea for this project came to us pretty easily but the realization did not come as easy. We wanted to create something that could be useful. We initially struggled with the impossibility of using a database. The choice between a web app and a desktop app took us some time but in the end, we choose a desktop app because it would be easier to upload a picture of items for the users.
+
+Despite not having prior experience working together on a project, we efficiently allocated the necessary implementations for the app. However, we did not effectively manage the given time initially. Nonetheless, we ultimately succeeded in completing the assigned task.
 
 ### 5.2. Division of Responsibilities
 
@@ -160,7 +162,7 @@ Elaborate on the main challenges each group member faced throughout the project 
 
 Describe what you learned with this project.
 
-- **Irene Avezzù** I learned with Gson developing serialization and deserialization methods. I also learned that connecting the back and front end take much longer than I expected. During this group project, I learned how important it is to set coding style rules before beginning to have consistent code.
+- **Irene Avezzù** I gained experience with Gson while working on serialization and deserialization methods. Additionally, I discovered that connecting the backend and frontend components of the app required more time than initially anticipated. Furthermore, during this group project, I also learned how important it is to set coding style rules before beginning to have consistent code.
 - **Josephine Sacchetto:** I learned how to implement the design pattern and that without communication among those working on the same project, one cannot proceed effectively and efficiently toward the result.
 
 
