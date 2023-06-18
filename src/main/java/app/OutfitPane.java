@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class OutfitPane extends HBox {
     private App application;
     private boolean tf = false;
@@ -48,6 +51,7 @@ public class OutfitPane extends HBox {
     private ImageView profile, logo;
     private HBox menu, label, filters, cardsr1, cardsr2;
     private VBox filter1, filter2, show;
+    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -140,7 +144,8 @@ public class OutfitPane extends HBox {
         profile.setOnMouseClicked(this::profileEvent);
 
         //logo image
-        logo = new ImageView("images/Logo.png");
+        generalPath = Paths.get("images", "Logo.png");
+        logo = new ImageView(generalPath.toString());
 
         //filters
         //first filter -> occasions
@@ -1267,7 +1272,8 @@ public class OutfitPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        generalPath = Paths.get("src", "main", "resources", "json", "app.json");
+        String path = generalPath.toString();
 
         //write into the file
         FileWriter fw = null;
@@ -1303,7 +1309,8 @@ public class OutfitPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            generalPath = Paths.get("src", "main", "resources", "json", "app.json");
+            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

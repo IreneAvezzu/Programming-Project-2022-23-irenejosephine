@@ -32,7 +32,7 @@ public class AddPane extends HBox {
     private ImageView logo;
     private VBox outfitVB, itemVB, show;
     private HBox head, row1;
-    private Path path;
+    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -47,8 +47,8 @@ public class AddPane extends HBox {
         font = new Font("Times New Roman",24);
         title.setFont(font);
 
-        path = Paths.get("images", "Logo.png");
-        logo = new ImageView(path.toString());
+        generalPath = Paths.get("images", "Logo.png");
+        logo = new ImageView(generalPath.toString());
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);
 

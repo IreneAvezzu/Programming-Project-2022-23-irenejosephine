@@ -19,7 +19,7 @@ public class Wardrobe <T extends Item>{
     private ArrayList <Outfit> outfits = new ArrayList<>();
     private String username, password, email, phone, description = "Click Edit to modify your Bio", picture;
     private int itemId, outfitId;
-    private Path path;
+    private Path generalPath;
 
 
     /**
@@ -35,8 +35,8 @@ public class Wardrobe <T extends Item>{
         this.password = password;
         this.email = email;
         this.phone = phone;
-        path = Paths.get("images", "profile.png");
-        this.picture = path.toString();
+        generalPath = Paths.get("images", "profile.png");
+        this.picture = generalPath.toString();
         itemId =0;
     }
 

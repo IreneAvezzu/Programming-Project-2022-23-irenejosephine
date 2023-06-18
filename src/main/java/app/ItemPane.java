@@ -59,7 +59,7 @@ public class ItemPane extends HBox {
     private ButtonType delete;  //Dialoge box
     private HBox menu, label, filters, cardsr1, cardsr2;
     private VBox filter1, filter2, filter3, show;
-    private Path path;
+    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -275,8 +275,8 @@ public class ItemPane extends HBox {
         profile.setOnMouseClicked(this::profileEvent);
 
         //logo image
-        path = Paths.get("images", "Logo.png");
-        logo = new ImageView(path.toString());
+        generalPath = Paths.get("images", "Logo.png");
+        logo = new ImageView(generalPath.toString());
 
         //filters
         //first filter -> occasions
@@ -1592,8 +1592,8 @@ public class ItemPane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        path = Paths.get("src","main","resources","json","app.json");
-        String pathStr = path.toString();
+        generalPath = Paths.get("src","main","resources","json","app.json");
+        String pathStr = generalPath.toString();
 
         //write into the file
         FileWriter fw = null;
@@ -1629,8 +1629,8 @@ public class ItemPane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            path = Paths.get("src","main","resources","json","app.json");
-            BufferedReader reader = new BufferedReader(new FileReader(path.toString()));
+            generalPath = Paths.get("src","main","resources","json","app.json");
+            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

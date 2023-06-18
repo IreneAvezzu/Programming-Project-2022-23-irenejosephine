@@ -16,6 +16,9 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import java.io.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * This class generates a scene where the user can access and update its personal data
  * @author Josephine Sacchetto frontend
@@ -34,6 +37,7 @@ public class ProfilePane extends HBox {
     private HBox top;
     private VBox right, left;
     private String set_username, set_password, set_email, set_phone, set_description, set_photo;
+    private Path generalPath;
 
     /**
      * This method is a isEmailValid() support method and counts the occurrences of a character inside a String.
@@ -55,7 +59,8 @@ public class ProfilePane extends HBox {
         this.index = index;
 
         //logo image and event handler
-        logo = new ImageView("images/Logo.png");
+        generalPath = Paths.get("images", "Logo.png");
+        logo = new ImageView(generalPath.toString());
         logo.setPickOnBounds(true); // allows click on transparent areas
         logo.setOnMouseClicked(this::logoEvent);//MouseEvent e)
 
@@ -381,7 +386,8 @@ public class ProfilePane extends HBox {
             return true;
         }
         else {
-            photo = "src/main/resources/"+photo;
+            generalPath = Paths.get("src", "main", "resources", photo);
+            photo = generalPath.toString();
             File f = new File(photo);
             if (f.exists() && !f.isDirectory()){
                 return true;
@@ -400,7 +406,8 @@ public class ProfilePane extends HBox {
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        String path = "src\\main\\resources\\json\\app.json";
+        generalPath = Paths.get("src", "main", "resources", "json", "app.json");
+        String path = generalPath.toString();
 
         //write into the file
         FileWriter fw = null;
@@ -436,7 +443,8 @@ public class ProfilePane extends HBox {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            generalPath = Paths.get("src", "main", "resources", "json", "app.json");
+            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

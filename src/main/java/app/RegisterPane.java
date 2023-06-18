@@ -40,7 +40,7 @@ public class RegisterPane extends GridPane{
     private ImageView img;
     private String set_username, set_password, set_email, set_phone;
     private App application;
-    private Path path;
+    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -52,8 +52,8 @@ public class RegisterPane extends GridPane{
         title= new Label("Register");
         font = new Font("Times New Roman",24);
         font2 = Font.font("Times New Roman", FontWeight.BOLD, 40);
-        path = Paths.get("images","Profile.png");
-        img = new ImageView(path.toString());
+        generalPath = Paths.get("images","Profile.png");
+        img = new ImageView(generalPath.toString());
         username = new Label("Username: *");
         inputusername = new TextField();
         password = new Label("Password: *");
@@ -315,8 +315,8 @@ public class RegisterPane extends GridPane{
         Gson gson = new Gson ();
         String jsonString = gson.toJson(getApplication());
 
-        path = Paths.get("src","main","resources","json","app.json");
-        String pathStr = path.toString();
+        generalPath = Paths.get("src","main","resources","json","app.json");
+        String pathStr = generalPath.toString();
 
         //write into the file
         FileWriter fw = null;
@@ -352,8 +352,8 @@ public class RegisterPane extends GridPane{
         String s="";
         //READ from a file using BufferedReader
         try {
-            path = Paths.get("src","main","resources","json","app.json");
-            BufferedReader reader = new BufferedReader(new FileReader(path.toString()));
+            generalPath = Paths.get("src","main","resources","json","app.json");
+            BufferedReader reader = new BufferedReader(new FileReader(generalPath.toString()));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;

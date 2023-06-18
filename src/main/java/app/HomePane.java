@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Generates a scene where the main page of the application is displayed.
@@ -34,6 +36,7 @@ public class HomePane extends HBox {
     private Button welcome, aboutus, information, add;
     private ImageView profile, logo, backgroudView;
     private Image backgroud;
+    private Path generalPath;
 
     /**
      * Constructor of the object
@@ -125,7 +128,8 @@ public class HomePane extends HBox {
 	    profile.setPickOnBounds(true); // allows click on transparent areas
 
         //logo image
-        logo = new ImageView("images/Logo.png");
+        generalPath = Paths.get("images", "Logo.png");
+        logo = new ImageView(generalPath.toString());
 
         //information buttons
         welcome = new Button(
@@ -144,7 +148,8 @@ public class HomePane extends HBox {
                 "buttons at the end of this page\n"
         );
         welcome.setStyle("-fx-background-color: #FFE5CC");
-        Image img = new Image("images/Logo2.png");
+        generalPath = Paths.get("images", "Logo2.png");
+        Image img = new Image(generalPath.toString());
         ImageView view = new ImageView(img);
         view.setFitHeight(100);
         view.setFitWidth(100);
@@ -158,13 +163,15 @@ public class HomePane extends HBox {
         information.setStyle("-fx-background-color: orange");
 
 	    //background image
-	    backgroud = new Image("images/Wardrobe.jpg");
+	    generalPath = Paths.get("images", "Wardrobe.jpg");
+        backgroud = new Image(generalPath.toString());
 	    backgroudView = new ImageView(backgroud);
 	    backgroudView.setFitHeight(160);
 	    backgroudView.setFitWidth(160);
 	    backgroudView.setPreserveRatio(true);
 
-	    setStyle("-fx-background-color: #FFE5CC; -fx-background-image:url('images/Wardrobe.jpg');-fx-background-repeat: no-repeat; -fx-background-size: 700 400; -fx-background-position: center center;");
+        // generalPath = Paths.get("images", "Wardrobe.jpg");
+	    setStyle("-fx-background-color: #FFE5CC; -fx-background-image:url('images/Wardrobe.jpg');-fx-background-repeat: no-repeat; -fx-background-size: 700 400; -fx-background-position: center center;"); //+ generalPath.toString()+"');-fx-background-repeat: no-repeat; -fx-background-size: 700 400; -fx-background-position: center center;");
 	    setAlignment(Pos.BASELINE_CENTER);
 
         //layout
@@ -256,7 +263,8 @@ public class HomePane extends HBox {
 
         );
 
-        Image image = new Image("images/aboutUs.png");
+        generalPath = Paths.get("images", "aboutUs.png");
+        Image image = new Image(generalPath.toString()); 
         ImageView view = new ImageView(image);
         view.setFitHeight(250);
         view.setFitWidth(160);
