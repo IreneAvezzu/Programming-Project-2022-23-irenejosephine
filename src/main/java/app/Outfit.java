@@ -29,6 +29,7 @@ public class Outfit {
         setSeasonOfOutfit(selectedSeason);
         setOccasionOfOutfit(selectedOccasion);
         this.description2=description2;
+        description2.replace("\nnull", "");
     }
 
     /**
