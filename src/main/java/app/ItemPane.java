@@ -48,6 +48,7 @@ public class ItemPane extends HBox {
     private ButtonType delete;  //Dialoge box
     private HBox menu, label, filters, cardsr1, cardsr2;
     private VBox filter1, filter2, filter3, show;
+    private int popUpIndex=-1;
 
     /**
      * Constructor of the object
@@ -691,322 +692,74 @@ public class ItemPane extends HBox {
 
 
     }
+
+    private void popUpEvent(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        Image image;
+        if (tf==true) {
+            alert.setContentText(filteredDisplayedItems.get(popUpIndex).toString());
+            image = new Image(filteredDisplayedItems.get(popUpIndex).getPicture());
+        }
+        else{
+            alert.setContentText(displayedItems.get(popUpIndex).toString());
+            image = new Image(displayedItems.get(popUpIndex).getPicture());
+        }
+        ImageView view = new ImageView(image);
+        view.setFitHeight(160);
+        view.setFitWidth(160);
+        view.setPreserveRatio(true);
+        alert.setGraphic(view);
+        alert.getButtonTypes().setAll(delete, ok);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == delete) {
+            int id = -1;
+            if (tf==true) {
+                id = filteredDisplayedItems.get(popUpIndex).getId();}
+            else{
+                id = displayedItems.get(popUpIndex).getId();
+            }
+
+            application.getWardrobe(index).removeId(id);
+            updateApp();
+            Alert alert1 = new Alert(AlertType.INFORMATION);
+            alert1.setTitle("Information Dialog");
+            alert1.setHeaderText(null);
+            alert1.setContentText("The item has been deleted from your closet");
+            alert1.showAndWait();
+        }
+    }
+
     /**
      * Event handler for when the item card button is clicked.
      * Shows the item in a Dialog Box with the description and allows to delete that item
      * @param event
      */
     private void popUpEvent1(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedItems.get(0).toString());
-            Image image = new Image(filteredDisplayedItems.get(0).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = filteredDisplayedItems.get(0).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedItems.get(0).toString());
-            Image image = new Image(displayedItems.get(0).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = displayedItems.get(0).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
+        popUpIndex = 0;
+        popUpEvent();
     }
     private void popUpEvent2(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedItems.get(1).toString());
-            Image image = new Image(filteredDisplayedItems.get(1).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = filteredDisplayedItems.get(1).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedItems.get(1).toString());
-            Image image = new Image(displayedItems.get(1).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = displayedItems.get(1).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
+        popUpIndex = 1;
+        popUpEvent();
     }
     private void popUpEvent3(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedItems.get(2).toString());
-            Image image = new Image(filteredDisplayedItems.get(2).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = filteredDisplayedItems.get(2).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedItems.get(2).toString());
-            Image image = new Image(displayedItems.get(2).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = displayedItems.get(2).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
+        popUpIndex = 2;
+        popUpEvent();
     }
     private void popUpEvent4(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedItems.get(3).toString());
-            Image image = new Image(filteredDisplayedItems.get(3).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = filteredDisplayedItems.get(3).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedItems.get(3).toString());
-            Image image = new Image(displayedItems.get(3).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = displayedItems.get(3).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
+        popUpIndex = 3;
+        popUpEvent();
     }
     private void popUpEvent5(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedItems.get(4).toString());
-            Image image = new Image(filteredDisplayedItems.get(4).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = filteredDisplayedItems.get(4).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedItems.get(4).toString());
-            Image image = new Image(displayedItems.get(4).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = displayedItems.get(4).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
+        popUpIndex = 4;
+        popUpEvent();
     }
     private void popUpEvent6(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedItems.get(5).toString());
-            Image image = new Image(filteredDisplayedItems.get(5).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = filteredDisplayedItems.get(5).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedItems.get(5).toString());
-            Image image = new Image(displayedItems.get(5).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.getButtonTypes().setAll(delete, ok);
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.get() == delete) {
-                int id = displayedItems.get(5).getId();
-                application.getWardrobe(index).removeId(id);
-                updateApp();
-                Alert alert1 = new Alert(AlertType.INFORMATION);
-                alert1.setTitle("Information Dialog");
-                alert1.setHeaderText(null);
-                alert1.setContentText("The item has been deleted from your closet");
-                alert1.showAndWait();
-            }
-        }
+        popUpIndex = 5;
+        popUpEvent();
     }
     /**
      * Getter of application
