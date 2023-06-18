@@ -162,6 +162,10 @@ Elaborate on the main challenges each group member faced throughout the project 
 
 Describe what you learned with this project.
 
-- **Irene Avezzù** I learned with Gson developing serialization and deserialization methods. I also learned that connecting the back and front end take much longer than I expected.
-- **Josephine Sacchetto:** I learned how to implement the design pattern and that without communication among those working on the same project, one cannot proceed effectively and efficiently toward the result. 
+- **Irene Avezzù** I learned with Gson developing serialization and deserialization methods. I also learned that connecting the back and front end take much longer than I expected. During this group project, I learned how important it is to set coding style rules before beginning to have consistent code.
+- **Josephine Sacchetto:** I learned how to implement the design pattern and that without communication among those working on the same project, one cannot proceed effectively and efficiently toward the result.
 
+
+### Clarification
+
+The project was initially developed as explained so far by the two students but after the winter semester of the academic year 2022-23, Josephine withdrew from her studies. During the first exam session, in which I presented the whole project, some issues with code readability and transportability on different operating systems occurred. I was the only one who worked on the project since then to resolve these problems. I take responsibility only for the code readability of the front end but the rest of it was Josephine's work.
