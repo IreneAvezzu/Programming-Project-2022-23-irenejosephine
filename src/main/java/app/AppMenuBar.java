@@ -354,8 +354,6 @@ public class AppMenuBar extends HBox{
                         break;
                     }
                 }
-                scene = new Scene(new ItemPane(getApplication(), getIndex(), fav.getText()), 800, 600);
-                stage2.setTitle("Item");
                 break;
             }
             case "outfit":{
