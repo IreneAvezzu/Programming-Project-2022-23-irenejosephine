@@ -19,6 +19,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class OutfitPane extends HBox {
     private App application;
@@ -39,6 +40,7 @@ public class OutfitPane extends HBox {
     private VBox filter1, filter2, show;
 
     private AppMenuBar amb;
+    private int popUpIndex;
 
     /**
      * Constructor of the object
@@ -93,7 +95,6 @@ public class OutfitPane extends HBox {
 
         filter1 = new VBox(occasionLabel, occasionsFilter);
         filter2 = new VBox(seasonLabel, seasonsFilter);
-
 
         Button buttons [] = createCard(outfitToDisplay, internIndex);
         if (outfitToDisplay.size()==0){
@@ -510,186 +511,52 @@ public class OutfitPane extends HBox {
 
 
     }
-    /**
-     * Event handler for when the item card button is clicked.
-     * Shows the item in a Dialog Box with the description and allows to delete that item
-     * @param event
-     */
+
+    private void popUpEvent(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        Image image;
+        if (tf==true) {
+            alert.setContentText(filteredDisplayedOutfit.get(popUpIndex).toString());
+            image = new Image(filteredDisplayedOutfit.get(popUpIndex).getPicture());
+        }
+        else{
+            alert.setContentText(displayedOutfits.get(popUpIndex).toString());
+            image = new Image(displayedOutfits.get(popUpIndex).getPicture());
+        }
+        ImageView view = new ImageView(image);
+        view.setFitHeight(160);
+        view.setFitWidth(160);
+        view.setPreserveRatio(true);
+        alert.setGraphic(view);
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+
     private void popUpEvent1(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedOutfit.get(0).toString());
-            Image image = new Image(filteredDisplayedOutfit.get(0).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedOutfits.get(0).toString());
-            Image image = new Image(displayedOutfits.get(0).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-
-        }
+        popUpIndex = 0;
+        popUpEvent();
     }
     private void popUpEvent2(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedOutfit.get(1).toString());
-            Image image = new Image(filteredDisplayedOutfit.get(1).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-
-
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedOutfits.get(1).toString());
-            Image image = new Image(displayedOutfits.get(1).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
+        popUpIndex = 1;
+        popUpEvent();
     }
     private void popUpEvent3(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedOutfit.get(2).toString());
-            Image image = new Image(filteredDisplayedOutfit.get(2).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedOutfits.get(2).toString());
-            Image image = new Image(displayedOutfits.get(2).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
+        popUpIndex = 2;
+        popUpEvent();
     }
     private void popUpEvent4(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedOutfit.get(3).toString());
-            Image image = new Image(filteredDisplayedOutfit.get(3).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedOutfits.get(3).toString());
-            Image image = new Image(displayedOutfits.get(3).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
+        popUpIndex = 3;
+        popUpEvent();
     }
     private void popUpEvent5(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedOutfit.get(4).toString());
-            Image image = new Image(filteredDisplayedOutfit.get(4).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedOutfits.get(4).toString());
-            Image image = new Image(displayedOutfits.get(4).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
+        popUpIndex = 4;
+        popUpEvent();
     }
     private void popUpEvent6(ActionEvent event) {
-        if (tf==true){
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(filteredDisplayedOutfit.get(5).toString());
-            Image image = new Image(filteredDisplayedOutfit.get(5).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-        }
-        else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText(displayedOutfits.get(5).toString());
-            Image image = new Image(displayedOutfits.get(5).getPicture());
-            ImageView view = new ImageView(image);
-            view.setFitHeight(160);
-            view.setFitWidth(160);
-            view.setPreserveRatio(true);
-            alert.setGraphic(view);
-            alert.showAndWait();
-
-        }
+        popUpIndex = 5;
+        popUpEvent();
     }
-
 
     /**
      * Getter of application
