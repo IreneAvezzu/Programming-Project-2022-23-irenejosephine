@@ -58,7 +58,7 @@ public class RegisterPane extends GridPane{
         register= new Button("Register");
         register.setStyle("-fx-background-color: orange");
         login=new Label("Still have an account? ");
-        signIn = new Button("Sing in");
+        signIn = new Button("Sign in");
         signIn.setStyle("-fx-background-color: orange");
 
         title.setFont(font2);

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class Start extends javafx.application.Application {
         String s="";
         //READ from a file using BufferedReader
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src\\main\\resources\\json\\app.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("src" + File.separator + "main" + File.separator + "resources" + File.separator + "json" + File.separator +"app.json"));
             String line = reader.readLine();
             while (line!=null){
                 s= s + line;
